@@ -2,40 +2,11 @@ import React from 'react';
 import './App.css';
 import Board from './components/board/board';
 import Heading from './components/heading/heading';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 function App() {
-    const [board, setBoard] = React.useState<string[]>([
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-    ]);
+    const board = useSelector((state: RootState) => state.board.board);
     return (
         <div className='App'>
             <Heading type='h1' text='Hello World' />
