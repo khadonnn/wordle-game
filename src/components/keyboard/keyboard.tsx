@@ -55,10 +55,7 @@ const Keyboard: React.FC = () => {
                     )}
                     {row.split(' ').map((letter, idx2) => (
                         <div className='letter-row' key={idx2}>
-                            <Key
-                                letter={letter.toUpperCase()}
-                                onClick={handleKeyInput}
-                            />
+                            <Key letter={letter.toUpperCase()} />
                             {letter === 'm' && (
                                 <span
                                     onClick={() => handleKeyInput('Backspace')}

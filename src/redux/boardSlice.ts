@@ -34,6 +34,8 @@ const initialState = {
         '',
     ],
     pos: 0,
+    row: 0,
+    key: '',
 };
 export const boardSlice = createSlice({
     name: 'board',
@@ -48,8 +50,14 @@ export const boardSlice = createSlice({
         decPos: (state) => {
             state.pos--;
         },
+        incRow: (state) => {
+            state.row++;
+        },
+        setKey: (state, action) => {
+            state.key = action.payload;
+        },
     },
 });
-export const { setBoard, incPos, decPos } = boardSlice.actions;
+export const { setBoard, incPos, decPos, setKey } = boardSlice.actions;
 
 export default boardSlice.reducer;
