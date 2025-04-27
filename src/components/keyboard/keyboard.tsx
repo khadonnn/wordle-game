@@ -11,10 +11,12 @@ const Keyboard: React.FC = () => {
         'a s d f g h j k l',
         'z x c v b n m',
     ];
+
     const dispatch = useDispatch();
     const position = useSelector((state: RootState) => state.board.pos);
     const board = useSelector((state: RootState) => state.board.board);
     const row = useSelector((state: RootState) => state.board.row);
+    const [isEnterPressed, setIsEnterPressed] = React.useState(false);
     const handleKeyInput = (key: string) => {
         const letter = key.toLowerCase();
 
@@ -26,13 +28,20 @@ const Keyboard: React.FC = () => {
             dispatch(decPos());
             dispatch(setBoard(newBoard));
         } else if (letter === 'enter') {
-            // TODO: handle enter logic
-            if (position % 5 === 0 && position !== 0) {
-                dispatch(incRow());
-            }
             console.log('enter');
+            console.log('row: ', row);
+            if (
+                position % 5 === 0 &&
+                position !== 0 &&
+                !isEnterPressed &&
+                Math.floor((position - 1) / 5) === row
+            ) {
+                dispatch(incRow());
+                setIsEnterPressed(true);
+            } else {
+                console.log('Enter invalid, conditions not met');
+            }
         } else if (/^[a-z]$/.test(letter)) {
-            console.log(position);
             if (position >= board.length) return;
             if (Math.floor(position / 5) !== row) return;
             const newBoard = [...board];
@@ -47,8 +56,11 @@ const Keyboard: React.FC = () => {
             handleKeyInput(e.key);
         };
         window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [board, position, row]);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            setIsEnterPressed(false);
+        };
+    }, [board, position, row, isEnterPressed]);
 
     return (
         <div className='keyboard-container'>
