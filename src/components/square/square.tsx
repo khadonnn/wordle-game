@@ -39,9 +39,6 @@ const Square: React.FC<IProps> = (props) => {
         },
     };
     React.useEffect(() => {
-        console.log(currentPos);
-        console.log(correctWord[currentPos]);
-        console.log(val);
         if (correctWord[currentPos] === val) {
             setCorrect(true);
         } else if (!correct && val !== '' && correctWord.includes(val)) {

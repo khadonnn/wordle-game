@@ -1,9 +1,9 @@
-import React from 'react';
 import './App.css';
 import Board from './components/board/board';
 import Heading from './components/heading/heading';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
     const board = useSelector((state: RootState) => state.board.board);
@@ -14,6 +14,7 @@ function App() {
             <div className='board-container'>
                 <Board board={board} />
             </div>
+            <ToastContainer />
         </div>
     );
 }
